@@ -167,7 +167,7 @@ Considered if <tt class="docutils literal"><span class="pre">method='vert_motion
 <dd><p>Calculate the pose of the US images with respect to the global reference frame.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id1">[Ref2]</a>, this is the product <img src="../_images/mathmpl/math-ba0c36ac94.png" style="position: relative; bottom: -7px"/>.</p>
+<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id1">[Ref2]</a>, this is the product <img src="../_images/mathmpl/math-ba0c36ac94.png" style="position: relative; bottom: -6px"/>.</p>
 </div>
 </dd></dl>
 
@@ -177,7 +177,7 @@ Considered if <tt class="docutils literal"><span class="pre">method='vert_motion
 <dd><p>Calculate the attitude (or pose) of the marker-based US probe reference frame with respect to the global reference frame.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id2">[Ref2]</a>, this is named <img src="../_images/mathmpl/math-d30a78994e.png" style="position: relative; bottom: -7px"/>.</p>
+<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id2">[Ref2]</a>, this is named <img src="../_images/mathmpl/math-d30a78994e.png" style="position: relative; bottom: -6px"/>.</p>
 </div>
 <p>After extracting markers data from the kinematics files set with method <tt class="docutils literal"><span class="pre">setKineFiles()</span></tt>, this data will
 be concatenated and resampled using <tt class="docutils literal"><span class="pre">USTimeVector</span></tt>, if this one is available. Otherwise, kinematics data
@@ -314,7 +314,7 @@ frame, optimally containing the US images is the first quadrant.</p>
 <dd><p>Calculate the attitude (or pose) of the US images with respect to the probe reference frame.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id6">[Ref2]</a>, this is named <img src="../_images/mathmpl/math-b1eaade554.png" style="position: relative; bottom: -7px"/>.</p>
+<p class="last">In <a class="reference internal" href="../intro.html#ref2" id="id6">[Ref2]</a>, this is named <img src="../_images/mathmpl/math-b1eaade554.png" style="position: relative; bottom: -6px"/>.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3028,7 +3028,7 @@ J Biomech. Engng 1983 105: 136-144</p>
 
 <dl class="function">
 <dt id="Py3DFreeHandUS.kine.getJointAngles">
-<tt class="descclassname">Py3DFreeHandUS.kine.</tt><tt class="descname">getJointAngles</tt><big>(</big><em>R1</em>, <em>R2</em>, <em>R2anglesFun=&lt;function R2zxy at 0x00000000069DB198&gt;</em><big>)</big><a class="reference internal" href="../_modules/Py3DFreeHandUS/kine.html#getJointAngles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Py3DFreeHandUS.kine.getJointAngles" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">Py3DFreeHandUS.kine.</tt><tt class="descname">getJointAngles</tt><big>(</big><em>R1</em>, <em>R2</em>, <em>R2anglesFun=&lt;function R2zxy at 0x000000001448A518&gt;</em><big>)</big><a class="reference internal" href="../_modules/Py3DFreeHandUS/kine.html#getJointAngles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Py3DFreeHandUS.kine.getJointAngles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate 3 joint angles between 2 rigid bodies.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5251,7 +5251,7 @@ applied, with some small modifications
 If &#8216;avg_good_features&#8217;, an average of the position of the good 
 features detected is calculated.
 If &#8216;lrmost_x_good_features&#8217;, these further parameters are used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">uTh</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">uTh</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">nKeep</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -5282,7 +5282,7 @@ were developed for the specific motion of the MTJ, that is:</p>
 </ul>
 </div>
 <p>If &#8216;kmeans_Lee2008&#8217;, these further parameters are used:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">nClusters</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">nClusters</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">clusterOnlyVelocity</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">pctEx</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
 <span class="n">pctIn</span> <span class="o">=</span> <span class="n">techniquePars</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
@@ -5527,6 +5527,32 @@ rows as the number of time frames in the original input image, and as
 many columns as the number of trackers. Columns orders follows the 
 order of <tt class="docutils literal"><span class="pre">trackersPars</span></tt>. Frames outside the range (f1, f2) are set as
 np.nan.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Py3DFreeHandUS.tracking.trackMTJ_gui">
+<tt class="descclassname">Py3DFreeHandUS.tracking.</tt><tt class="descname">trackMTJ_gui</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/Py3DFreeHandUS/tracking.html#trackMTJ_gui"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Py3DFreeHandUS.tracking.trackMTJ_gui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a GUI to set most of the important options for MTJ tracking.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dcmFile</strong> : str</p>
+<blockquote>
+<div><p>File path of the input DICOM file.</p>
+</div></blockquote>
+<p><strong>p</strong> : dict</p>
+<blockquote>
+<div><p>Dictionary of optional arguments to be give to <tt class="docutils literal"><span class="pre">trackMTJ()</span></tt>.</p>
+</div></blockquote>
+<p><strong>resFile</strong> : str</p>
+<blockquote class="last">
+<div><p>File path of the output .res file.</p>
 </div></blockquote>
 </td>
 </tr>

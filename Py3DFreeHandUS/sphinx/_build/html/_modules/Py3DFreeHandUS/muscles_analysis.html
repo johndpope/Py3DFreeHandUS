@@ -47,14 +47,13 @@
           <div class="body">
             
   <h1>Source code for Py3DFreeHandUS.muscles_analysis</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">.. module:: muscles_analysis</span>
 <span class="sd">   :synopsis: module for analyzing image-based muscles properties</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">tracking</span> <span class="kn">import</span> <span class="n">trackMTJ</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <div class="viewcode-block" id="MTJlengths"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.muscles_analysis.MTJlengths">[docs]</a><span class="k">def</span> <span class="nf">MTJlengths</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">):</span>
@@ -85,11 +84,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>    
     
     <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="n">P3</span><span class="p">)</span>
-    <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dtendon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P2</span> <span class="o">-</span> <span class="n">P3</span><span class="p">)</span>
-    <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dcomplex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="n">P2</span><span class="p">)</span>
-    <span class="n">res</span><span class="p">[</span><span class="s">&#39;DmusclePct&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dtendon&#39;</span><span class="p">])</span>
-    <span class="n">res</span><span class="p">[</span><span class="s">&#39;DtendonPct&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dtendon&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;Dtendon&#39;</span><span class="p">])</span>
+    <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="n">P3</span><span class="p">)</span>
+    <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dtendon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P2</span> <span class="o">-</span> <span class="n">P3</span><span class="p">)</span>
+    <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dcomplex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P1</span> <span class="o">-</span> <span class="n">P2</span><span class="p">)</span>
+    <span class="n">res</span><span class="p">[</span><span class="s1">&#39;DmusclePct&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dtendon&#39;</span><span class="p">])</span>
+    <span class="n">res</span><span class="p">[</span><span class="s1">&#39;DtendonPct&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dtendon&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dmuscle&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Dtendon&#39;</span><span class="p">])</span>
     
     <span class="k">return</span> <span class="n">res</span>
     </div>

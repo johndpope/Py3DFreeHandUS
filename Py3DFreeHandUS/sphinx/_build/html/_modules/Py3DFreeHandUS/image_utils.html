@@ -47,7 +47,7 @@
           <div class="body">
             
   <h1>Source code for Py3DFreeHandUS.image_utils</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">.. module:: image_utils</span>
 <span class="sd">   :synopsis: helper module for image data handling</span>
@@ -124,7 +124,7 @@
     <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">yv</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Np</span><span class="p">))</span>
     <span class="n">zv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">Np</span><span class="p">))</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">Np</span><span class="p">))</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xv</span><span class="p">,</span><span class="n">yv</span><span class="p">,</span><span class="n">zv</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c"># 4 x Np</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xv</span><span class="p">,</span><span class="n">yv</span><span class="p">,</span><span class="n">zv</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 4 x Np</span>
     <span class="k">return</span> <span class="n">p</span>
     
 </div>
@@ -219,7 +219,7 @@
     <span class="k">elif</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">I</span> <span class="o">=</span> <span class="n">rgb2grey</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">D</span><span class="p">[</span><span class="mi">2</span><span class="p">,:])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Image data format not recognized&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Image data format not recognized&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">I</span>
         
     
@@ -242,7 +242,7 @@
     <span class="k">return</span> <span class="n">I</span>
 
 </div>
-<div class="viewcode-block" id="readDICOM"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.readDICOM">[docs]</a><span class="k">def</span> <span class="nf">readDICOM</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;flattened&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="readDICOM"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.readDICOM">[docs]</a><span class="k">def</span> <span class="nf">readDICOM</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;flattened&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Read DICOM file (containing data for Nc channels, Nf frames, and images of size Nr x Nc).</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
@@ -267,17 +267,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ds</span> <span class="o">=</span> <span class="n">dicom</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
     <span class="n">D</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">pixel_array</span>
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;RGB&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;RGB&#39;</span><span class="p">:</span>
         <span class="k">pass</span>
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">&#39;flattened&#39;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span> <span class="c"># first dimension keeps or data channels (RGB, grey-alpha, grey, ...)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;flattened&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span> <span class="c1"># first dimension keeps or data channels (RGB, grey-alpha, grey, ...)</span>
             <span class="n">N</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]))[</span><span class="bp">None</span><span class="p">,:]</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[:,::</span><span class="n">N</span><span class="p">,:,:]</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="bp">None</span><span class="p">,:]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;{0}: unknown data format&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;{0}: unknown data format&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">D</span><span class="p">,</span> <span class="n">ds</span>
     
 </div>
@@ -299,12 +299,12 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="c"># Read image file</span>
+    <span class="c1"># Read image file</span>
     <span class="n">reader</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">ImageFileReader</span><span class="p">()</span>
     <span class="n">reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">Execute</span><span class="p">()</span>
     
-    <span class="c"># Convert images to Numpy arrays </span>
+    <span class="c1"># Convert images to Numpy arrays </span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">sitk</span><span class="o">.</span><span class="n">GetArrayFromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">image</span>
@@ -315,7 +315,7 @@
     <span class="k">return</span> <span class="n">ext</span>
     
 
-<div class="viewcode-block" id="readImage"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.readImage">[docs]</a><span class="k">def</span> <span class="nf">readImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="s">&#39;sitk&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="readImage"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.readImage">[docs]</a><span class="k">def</span> <span class="nf">readImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="s1">&#39;sitk&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Helper for reading image sequence input file.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
@@ -352,39 +352,39 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
-        <span class="c"># Get file path and extension</span>
+        <span class="c1"># Get file path and extension</span>
         <span class="n">imgFile</span> <span class="o">=</span> <span class="n">img</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="n">getFileExt</span><span class="p">(</span><span class="n">imgFile</span><span class="p">)</span>
         <span class="n">frame_rate</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="n">raw_obj</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">if</span> <span class="n">reader</span> <span class="o">==</span> <span class="s">&#39;sitk&#39;</span><span class="p">:</span>
-            <span class="c"># Read SITK file</span>
+        <span class="k">if</span> <span class="n">reader</span> <span class="o">==</span> <span class="s1">&#39;sitk&#39;</span><span class="p">:</span>
+            <span class="c1"># Read SITK file</span>
             <span class="n">I</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">readSITK</span><span class="p">(</span><span class="n">imgFile</span><span class="p">)</span>
-            <span class="c"># Get frame rate</span>
-            <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s">&#39;dcm&#39;</span><span class="p">:</span>
+            <span class="c1"># Get frame rate</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;dcm&#39;</span><span class="p">:</span>
                 <span class="n">md_keys</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">GetMetaDataKeys</span><span class="p">()</span>
-                <span class="n">cine_rate_key</span> <span class="o">=</span> <span class="s">&#39;0018|0040&#39;</span>
+                <span class="n">cine_rate_key</span> <span class="o">=</span> <span class="s1">&#39;0018|0040&#39;</span>
                 <span class="k">if</span> <span class="n">cine_rate_key</span> <span class="ow">in</span> <span class="n">md_keys</span><span class="p">:</span>
                     <span class="n">frame_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">GetMetaData</span><span class="p">(</span><span class="n">cine_rate_key</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Data format unknown&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Data format unknown&#39;</span><span class="p">)</span>
             <span class="n">raw_obj</span> <span class="o">=</span> <span class="n">image</span>
-        <span class="k">if</span> <span class="n">reader</span> <span class="o">==</span> <span class="s">&#39;pydicom&#39;</span><span class="p">:</span>
-            <span class="c"># Read DICOM uncompressed file</span>
+        <span class="k">if</span> <span class="n">reader</span> <span class="o">==</span> <span class="s1">&#39;pydicom&#39;</span><span class="p">:</span>
+            <span class="c1"># Read DICOM uncompressed file</span>
             <span class="n">I</span><span class="p">,</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">readDICOM</span><span class="p">(</span><span class="n">imgFile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="c"># Get frame rate</span>
-            <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s">&#39;dcm&#39;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s">&#39;CineRate&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="c1"># Get frame rate</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;dcm&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;CineRate&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
                     <span class="n">frame_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">CineRate</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;pydicom can only read DCM uncompressed files&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;pydicom can only read DCM uncompressed files&#39;</span><span class="p">)</span>
             <span class="n">raw_obj</span> <span class="o">=</span> <span class="n">ds</span>
-        <span class="c"># Create metadata dict</span>
+        <span class="c1"># Create metadata dict</span>
         <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">metadata</span><span class="p">[</span><span class="s">&#39;frame_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame_rate</span>
-        <span class="n">metadata</span><span class="p">[</span><span class="s">&#39;raw_obj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_obj</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;frame_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame_rate</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;raw_obj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_obj</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># Data unpacking</span>
+        <span class="c1"># Data unpacking</span>
         <span class="n">I</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="n">img</span>
         
     <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">metadata</span>
@@ -434,16 +434,16 @@
 <span class="sd">    float</span>
 <span class="sd">        CD2.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c">#logI1, logI2 = np.log(I1), np.log(I2)</span>
+    <span class="c1">#logI1, logI2 = np.log(I1), np.log(I2)</span>
     <span class="n">logI1</span><span class="p">,</span> <span class="n">logI2</span> <span class="o">=</span> <span class="n">I1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">),</span> <span class="n">I2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
     <span class="n">logD</span> <span class="o">=</span> <span class="n">logI1</span> <span class="o">-</span> <span class="n">logI2</span>
     <span class="n">logP</span> <span class="o">=</span> <span class="n">logD</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">logD</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="n">CD2</span> <span class="o">=</span> <span class="n">logP</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="c">#CD2 = np.exp(logP.sum())</span>
+    <span class="c1">#CD2 = np.exp(logP.sum())</span>
     <span class="k">return</span> <span class="n">CD2</span>
     
 </div>
-<div class="viewcode-block" id="histogramsSimilarity"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.histogramsSimilarity">[docs]</a><span class="k">def</span> <span class="nf">histogramsSimilarity</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span> <span class="n">H2</span><span class="p">,</span> <span class="n">meas</span><span class="o">=</span><span class="s">&#39;bhattacharyya_coef&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="histogramsSimilarity"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.image_utils.histogramsSimilarity">[docs]</a><span class="k">def</span> <span class="nf">histogramsSimilarity</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span> <span class="n">H2</span><span class="p">,</span> <span class="n">meas</span><span class="o">=</span><span class="s1">&#39;bhattacharyya_coef&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate similarity measure between histograms.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
@@ -461,7 +461,7 @@
 <span class="sd">        Similarity measure.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s">&#39;bhattacharyya_coef&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;bhattacharyya_coef&#39;</span><span class="p">:</span>
         <span class="n">B</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">compareHist</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span> <span class="n">H2</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_COMP_BHATTACHARYYA</span><span class="p">)</span>
         <span class="n">M</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span>
     <span class="k">return</span> <span class="n">M</span>
@@ -579,8 +579,8 @@
     <span class="n">C</span> <span class="o">=</span> <span class="n">createCenteredMaskCoords</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">H</span><span class="o">-</span><span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">W</span><span class="o">-</span><span class="n">w</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="n">Cres</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">C</span> <span class="o">+=</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-    <span class="k">if</span> <span class="n">meas</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;bhattacharyya_coef&#39;</span><span class="p">]:</span>
-        <span class="n">nBins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;nBins&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">meas</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;bhattacharyya_coef&#39;</span><span class="p">]:</span>
+        <span class="n">nBins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;nBins&#39;</span><span class="p">]</span>
         <span class="n">I1</span> <span class="o">=</span> <span class="n">T</span>
         <span class="n">H1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">I1</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
@@ -588,7 +588,7 @@
             <span class="n">I2</span> <span class="o">=</span> <span class="n">SW</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">H2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">I2</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>
             <span class="n">res</span><span class="p">[</span><span class="n">Cres</span><span class="p">[</span><span class="n">i</span><span class="p">,:]]</span> <span class="o">=</span> <span class="n">histogramsSimilarity</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span> <span class="n">H2</span><span class="p">,</span> <span class="n">meas</span><span class="o">=</span><span class="n">meas</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s">&#39;CD2&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;CD2&#39;</span><span class="p">:</span>
         <span class="n">I1</span> <span class="o">=</span> <span class="n">T</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span>
@@ -603,8 +603,8 @@
     
     </div>
 <span class="k">def</span> <span class="nf">jointHistogram</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="n">I2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="c"># from: http://pythonhosted.org/MedPy/_modules/medpy/metric/image.html</span>
-    <span class="n">bins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;bins&#39;</span><span class="p">]</span>
+    <span class="c1"># from: http://pythonhosted.org/MedPy/_modules/medpy/metric/image.html</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;bins&#39;</span><span class="p">]</span>
     <span class="n">r1</span> <span class="o">=</span> <span class="n">histogramRange</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
     <span class="n">r2</span> <span class="o">=</span> <span class="n">histogramRange</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
@@ -612,7 +612,7 @@
     <span class="k">return</span> <span class="n">hist</span>
     
 <span class="k">def</span> <span class="nf">marginalHistogram</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">bins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;bins&#39;</span><span class="p">]</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;bins&#39;</span><span class="p">]</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">histogramRange</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
     <span class="n">hist</span><span class="p">,</span> <span class="n">xedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">hist</span>
@@ -643,7 +643,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">Imin</span> <span class="o">-</span> <span class="n">s</span><span class="p">,</span> <span class="n">Imax</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span>
     
 <span class="k">def</span> <span class="nf">MI</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="n">I2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="c"># http://stackoverflow.com/questions/20491028/optimal-way-to-compute-pairwise-mutual-information-using-numpy</span>
+    <span class="c1"># http://stackoverflow.com/questions/20491028/optimal-way-to-compute-pairwise-mutual-information-using-numpy</span>
     <span class="n">H1</span> <span class="o">=</span> <span class="n">marginalEntropy</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">H2</span> <span class="o">=</span> <span class="n">marginalEntropy</span><span class="p">(</span><span class="n">I2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">H12</span> <span class="o">=</span> <span class="n">jointEntropy</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span> <span class="n">I2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

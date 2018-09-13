@@ -5,6 +5,10 @@
 
 """
 
+import guidata
+from guidata.dataset.datatypes import DataSet, BeginGroup, EndGroup, ValueProp
+from guidata.dataset.dataitems import ButtonItem, FloatItem, IntItem, BoolItem, ChoiceItem, FileSaveItem, FileOpenItem, DirectoryItem
+import tempfile, atexit, shutil
 from image_utils import *
 from converters import *
 from particle_filter import ParticleFilter
@@ -13,10 +17,10 @@ import cv2
 import SimpleITK as sitk
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from matplotlib.colors import Normalize, LogNorm, PowerNorm
+from matplotlib.colors import Normalize, LogNorm
 from scipy import signal
 from skimage import feature
-
+                                     
 
 
 
@@ -193,72 +197,312 @@ def calcVelocityLee2008(allDx, allDy, pctEx, pctIn, direction='max_avg_vel'):
     idx_v_ = np.argsort(allDy)
     Np = all_u.shape[0] / 55. * 100.
     if int(Np*pctEx) > 0:
-        all_u = all_u[Np*pctEx:-Np*pctEx]
-        idx_u = idx_u_[Np*pctEx:-Np*pctEx]
+        all_u = all_u[int(Np*pctEx):int(-Np*pctEx)]
+        idx_u = idx_u_[int(Np*pctEx):int(-Np*pctEx)]
         mask_u[idx_u] = 0
-        all_v = all_v[Np*pctEx:-Np*pctEx]
-        idx_v = idx_v_[Np*pctEx:-Np*pctEx]
+        all_v = all_v[int(Np*pctEx):int(-Np*pctEx)]
+        idx_v = idx_v_[int(Np*pctEx):int(-Np*pctEx)]
         mask_v[idx_v] = 0
-    u_avg_1 = all_u[:Np*pctIn].mean()
-    v_avg_1 = all_v[:Np*pctIn].mean()
-    u_avg_2 = all_u[-Np*pctIn:].mean()
-    v_avg_2 = all_v[-Np*pctIn:].mean()
+    u_avg_1 = all_u[:int(Np*pctIn)].mean()
+    v_avg_1 = all_v[:int(Np*pctIn)].mean()
+    u_avg_2 = all_u[int(-Np*pctIn):].mean()
+    v_avg_2 = all_v[int(-Np*pctIn):].mean()
     if direction == 'max_avg_vel':
         if np.abs(u_avg_1) > np.abs(u_avg_2):
             u = u_avg_1
-            mask_u[idx_u[:Np*pctIn]] = 1
-            mask_u[idx_u_[:Np*pctEx]] = 3
+            mask_u[idx_u[:int(Np*pctIn)]] = 1
+            mask_u[idx_u_[:int(Np*pctEx)]] = 3
         else:
             u = u_avg_2
-            mask_u[idx_u[-Np*pctIn:]] = 1
-            mask_u[idx_u_[-Np*pctEx:]] = 3
+            mask_u[idx_u[int(-Np*pctIn):]] = 1
+            mask_u[idx_u_[int(-Np*pctEx):]] = 3
         if np.abs(v_avg_1) > np.abs(v_avg_2):
             v = v_avg_1
-            mask_v[idx_v[:Np*pctIn]] = 1
-            mask_v[idx_v_[:Np*pctEx]] = 3
+            mask_v[idx_v[:int(Np*pctIn)]] = 1
+            mask_v[idx_v_[:int(Np*pctEx)]] = 3
         else:
             v = v_avg_2
-            mask_v[idx_v[-Np*pctIn:]] = 1
-            mask_v[idx_v_[-Np*pctEx:]] = 3
+            mask_v[idx_v[int(-Np*pctIn):]] = 1
+            mask_v[idx_v_[int(-Np*pctEx):]] = 3
     elif direction == 'pct_sign':
         direction_u = np.sign(all_u).sum()
         direction_v = np.sign(all_v).sum()
         if direction_u < 0:
             u = u_avg_1
-            mask_u[idx_u[:Np*pctIn]] = 1
-            mask_u[idx_u_[:Np*pctEx]] = 3
+            mask_u[idx_u[:int(Np*pctIn)]] = 1
+            mask_u[idx_u_[:int(Np*pctEx)]] = 3
         elif direction_u > 0:
             u = u_avg_2
-            mask_u[idx_u[-Np*pctIn:]] = 1
-            mask_u[idx_u_[-Np*pctEx:]] = 3
+            mask_u[idx_u[int(-Np*pctIn):]] = 1
+            mask_u[idx_u_[int(-Np*pctEx):]] = 3
         else:
             if np.abs(u_avg_1) > np.abs(u_avg_2):
                 u = u_avg_1
-                mask_u[idx_u[:Np*pctIn]] = 1
-                mask_u[idx_u_[:Np*pctEx]] = 3
+                mask_u[idx_u[:int(Np*pctIn)]] = 1
+                mask_u[idx_u_[:int(Np*pctEx)]] = 3
             else:
                 u = u_avg_2
-                mask_u[idx_u[-Np*pctIn:]] = 1
-                mask_u[idx_u_[-Np*pctEx:]] = 3
+                mask_u[idx_u[int(-Np*pctIn):]] = 1
+                mask_u[idx_u_[int(-Np*pctEx):]] = 3
         if direction_v < 0:
             v = v_avg_1
-            mask_v[idx_v[:Np*pctIn]] = 1
-            mask_u[idx_u_[:Np*pctEx]] = 3
+            mask_v[idx_v[:int(Np*pctIn)]] = 1
+            mask_u[idx_u_[:int(Np*pctEx)]] = 3
         elif direction_v > 0:
             v = v_avg_2
-            mask_v[idx_v[-Np*pctIn:]] = 1
-            mask_v[idx_v_[-Np*pctEx:]] = 3
+            mask_v[idx_v[int(-Np*pctIn):]] = 1
+            mask_v[idx_v_[int(-Np*pctEx):]] = 3
         else:
             if np.abs(v_avg_1) > np.abs(v_avg_2):
                 v = v_avg_1
-                mask_v[idx_v[:Np*pctIn]] = 1
-                mask_v[idx_v_[:Np*pctEx]] = 3
+                mask_v[idx_v[:int(Np*pctIn)]] = 1
+                mask_v[idx_v_[:int(Np*pctEx)]] = 3
             else:
                 v = v_avg_2
-                mask_v[idx_v[-Np*pctIn:]] = 1
-                mask_v[idx_v_[-Np*pctEx:]] = 3
+                mask_v[idx_v[int(-Np*pctIn):]] = 1
+                mask_v[idx_v_[int(-Np*pctEx):]] = 3
             
     return u, v, mask_u, mask_v
+    
+    
+
+def trackMTJ_gui():
+    """Opens a GUI to set most of the important options for MTJ tracking.
+
+    Returns
+    -------
+    dcmFile : str
+        File path of the input DICOM file.
+        
+    p : dict
+        Dictionary of optional arguments to be give to ``trackMTJ()``.
+        
+    resFile : str
+        File path of the output .res file.
+    
+    """
+    
+    TEMPDIR = tempfile.mkdtemp(prefix="test_")
+    atexit.register(shutil.rmtree, TEMPDIR)
+    FILE_DCM = tempfile.NamedTemporaryFile(suffix=".dcm", dir=TEMPDIR)
+    atexit.register(FILE_DCM.close)
+    FILE_AVI = tempfile.NamedTemporaryFile(suffix=".avi", dir=TEMPDIR)
+    atexit.register(FILE_AVI.close)
+    FILE_RES = tempfile.NamedTemporaryFile(suffix=".res", dir=TEMPDIR)
+    atexit.register(FILE_RES.close)
+    
+    canManuallyAdjust = ValueProp(False)
+    canSaveTechniqueResTo = ValueProp(False)
+    
+    class TrackParameters(DataSet):
+        
+        def openFile(instance, item, value):
+            try:
+                I, metadata = readImage(str(value), reader='sitk')
+                instance.I = I
+                TrackParameters.f2.set_prop("data", max=I.shape[0])
+                instance.f1 = 0
+                instance.f2 = I.shape[0] - 1
+                TrackParameters.x2.set_prop("data", max=I.shape[2])
+                instance.x1 = 0
+                instance.x2 = I.shape[2] - 1
+                TrackParameters.y2.set_prop("data", max=I.shape[1])
+                instance.y1 = 0
+                instance.y2 = I.shape[1] - 1
+            except e:
+                print('Error reading DCM file')
+            
+        def getCenter(dataset, item, value, parent):
+            w, h = dataset.w, dataset.h
+            f1 = dataset.f1
+            x1, x2 = dataset.x1, dataset.x2
+            y1, y2 = dataset.y1, dataset.y2
+            frame = dataset.I[f1,y1:y2,x1:x2]
+            global _cx, _cy
+            cx, cy = dataset.cx, dataset.cy
+            _cx, _cy = cx, cy
+            def onmouseRect(event, x, y, flags, param):
+                global _cx,_cy,p0
+                if flags & cv2.EVENT_FLAG_LBUTTON:
+                    _cx, _cy = int(x), int(y)
+                    p0 = createCenteredMaskCoords(_cx, _cy, h, w)[:,None,:]
+                    pts = p0[:,0,:]
+                    a, b = pts[:,0].min(), pts[:,1].min()
+                    c, d = pts[:,0].max(), pts[:,1].max()
+                    area_col = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+                    area_col2 = cv2.rectangle(area_col, (a,b),(c,d), (0,0,255), 1)
+                    if area_col2 is not None:
+                        area_col = area_col2
+                    cv2.imshow(win, area_col)        
+            win = 'Click on window center'
+            cv2.imshow(win, frame)
+            global p0  
+            p0 = None
+            cv2.setMouseCallback(win, onmouseRect)
+            if cx is None or cy is None:
+                cx, cy = w/2, h/2
+            onmouseRect(None, cx, cy, True, None)   # to show rectangle on prompt
+            cv2.waitKey()
+            cv2.destroyAllWindows()
+            cx, cy = _cx, _cy
+            dataset.cx, dataset.cy = cx, cy
+            
+        
+        def getOffset(dataset, item, value, parent):
+            f1 = dataset.f1
+            x1, x2 = dataset.x1, dataset.x2
+            y1, y2 = dataset.y1, dataset.y2
+            frame = dataset.I[f1,y1:y2,x1:x2]
+            global _cxo, _cyo
+            cx, cy = dataset.cx, dataset.cy
+            cxOffset, cyOffset = dataset.cxOffset, dataset.cyOffset
+            _cxo, _cyo = cxOffset + cx, cyOffset + cy
+            def onmouseOffset(event, x, y, flags, param):
+                global _cxo,_cyo
+                if flags & cv2.EVENT_FLAG_LBUTTON:
+                    _cxo, _cyo = int(x), int(y)
+                    area_col = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+                    area_col2 = cv2.circle(area_col,(int(_cxo),int(_cyo)),5,(0,0,255),1)
+                    if area_col2 is not None:
+                        area_col = area_col2
+                    cv2.imshow(win, area_col)        
+            win = 'Click on offset point'
+            cv2.imshow(win, frame)
+            cv2.setMouseCallback(win, onmouseOffset)
+            onmouseOffset(None, _cxo, _cyo, True, None)   # to show point on prompt
+            cv2.waitKey()
+            cv2.destroyAllWindows()
+            cxOffset, cyOffset = _cxo-cx, _cyo-cy
+            dataset.cxOffset, dataset.cyOffset = cxOffset, cyOffset
+            
+        def getDataCut(dataset, item, value, parent):
+            f1, f2 = dataset.f1, dataset.f2
+            x1, x2 = dataset.x1, dataset.x2
+            y1, y2 = dataset.y1, dataset.y2
+            def nothing(x):
+                pass
+            cv2.namedWindow('image')
+            cv2.createTrackbar('f1','image',f1,dataset.I.shape[0]-1,nothing)
+            cv2.createTrackbar('f2','image',f2,dataset.I.shape[0]-1,nothing)
+            cv2.createTrackbar('x1','image',x1,dataset.I.shape[2]-1,nothing)
+            cv2.createTrackbar('x2','image',x2,dataset.I.shape[2]-1,nothing)
+            cv2.createTrackbar('y1','image',y1,dataset.I.shape[1]-1,nothing)
+            cv2.createTrackbar('y2','image',y2,dataset.I.shape[1]-1,nothing)
+            while(1):
+                frame1 = dataset.I[f1].copy()
+                frame2 = dataset.I[f2].copy()
+                frame1[:,:x1], frame1[:,x2:] = 0, 0
+                frame2[:,:x1], frame2[:,x2:] = 0, 0
+                frame = np.hstack((frame1, frame2))
+                frame[:y1,:], frame[y2:,:] = 0, 0
+                cv2.imshow('image',frame)
+                k = cv2.waitKey(1) & 0xFF
+                cw = cv2.getWindowProperty('image', 1) < 0
+                if k == 27 or cw:
+                    break
+                f1 = cv2.getTrackbarPos('f1','image')
+                f2 = cv2.getTrackbarPos('f2','image')
+                x1 = cv2.getTrackbarPos('x1','image')
+                x2 = cv2.getTrackbarPos('x2','image')
+                y1 = cv2.getTrackbarPos('y1','image')
+                y2 = cv2.getTrackbarPos('y2','image')
+                dataset.f1, dataset.f2 = f1, f2
+                dataset.x1, dataset.x2 = x1, x2
+                dataset.y1, dataset.y2 = y1, y2
+            cv2.destroyAllWindows()
+        
+        # https://groups.google.com/forum/#!topic/guidata_guiqwt/9qk0TPGLMzk
+        img = FileOpenItem("DICOM file:", ("dcm",)).set_prop("display", callback=openFile)
+        _bdc = BeginGroup("Data cut")
+        f1 = IntItem("First time frame:", default=0, min=0).set_pos(col=0)
+        f2 = IntItem("Last time frame:", default=0, min=0).set_pos(col=1)
+        x1 = IntItem("Left-most x (px):", default=0, min=0).set_pos(col=2)
+        x2 = IntItem("Right-most x (px):", default=0, min=0).set_pos(col=3)
+        y1 = IntItem("Top-most y (px):", default=0, min=0).set_pos(col=4)
+        y2 = IntItem("Bottom-most y (px):", default=0, min=0).set_pos(col=5)
+        bDataCut = ButtonItem('Edit', getDataCut).set_pos(col=6)
+        _edc = EndGroup("Data cut")
+        
+        _bic = BeginGroup("Initial condition")
+        _btw = BeginGroup("Tracking window")
+        w = IntItem("Width (px):", default=131, min=0).set_pos(col=0)
+        h = IntItem("Height (px):", default=71, min=0).set_pos(col=1)
+        cx = IntItem("Window center x (px):", default=68, min=0).set_pos(col=2)
+        cy = IntItem("Window center y (px):", default=35, min=0).set_pos(col=3)
+        cxOffset = IntItem("MTJ x offset from window center (px):", default=0).set_pos(col=4)
+        cyOffset = IntItem("MTJ y offset from window center (px):", default=0).set_pos(col=5)
+        bCenter = ButtonItem('Edit', getCenter).set_pos(col=2, colspan=2)
+        bCenterOffset = ButtonItem('Edit', getOffset).set_pos(col=4, colspan=2)
+        _etw = EndGroup("Tracking window")
+        _eic = EndGroup("Initial condition")
+        
+        _bt = BeginGroup("Tracking")
+        plotImageInTracking = BoolItem("Plot image while tracking", default=True).set_pos(col=0)
+        adjustManuallyCxyOnTracking = BoolItem("Manually adjust MTJ point while tracking", default=False).set_prop("display", store=canManuallyAdjust).set_pos(col=1)
+        adjustManuallyCxyOnTrackingCondOFStdUTh = FloatItem("if std dev on optical flow x velocity is greater than (px/s):", default=1, min=0).set_prop("display", active=canManuallyAdjust).set_pos(col=2)
+        _blp = BeginGroup("Lee et al. parameters")
+        techniqueParsLeeMethod = ChoiceItem("Algorithm:", [('Lee2008', "Lee2008 original"), ('Lee2008_v2', "Lee2008 modified")], default='Lee2008_v2').set_pos(col=0)
+        techniqueParsLeePctEx = FloatItem("Velocity bands exclusion percentage (%):", default=0.02, min=0.001, max=1).set_pos(col=1)
+        techniqueParsLeePctIn = FloatItem("Velocity bands inclusion percentage (%):", default=0.05, min=0.001, max=1).set_pos(col=2)
+        _elp = EndGroup("Lee et al. parameters")
+        _et = EndGroup("Tracking")
+        
+        _br = BeginGroup("Results")
+        _bid = BeginGroup("Intermediate data")
+        saveTechniqueResToEnabled = BoolItem("Enabled", default=False).set_prop("display", store=canSaveTechniqueResTo)
+        saveTechniqueResTo = DirectoryItem("Folder:").set_prop("display", active=canSaveTechniqueResTo)
+        plotAddDataOFStdUTh0 = FloatItem("Optical flow x velocity std dev threshold (px/s):", default=2, min=0).set_prop("display", active=canSaveTechniqueResTo).set_pos(col=0)
+        plotAddDataOFStdVTh0 = FloatItem("Optical flow y velocity std dev threshold (px/s):", default=0.15, min=0).set_prop("display", active=canSaveTechniqueResTo).set_pos(col=1)
+        _eid = EndGroup("Intermediate data")   
+        _bfd = BeginGroup("Final data")
+        outFile = FileSaveItem("AVI file:", "avi")
+        resFile = FileSaveItem("RES file:", "res")
+        _efd = EndGroup("Final data")
+        _er = EndGroup("Results")
+        
+    # Create QApplication
+    _app = guidata.qapplication()
+    e = TrackParameters()
+    e.edit()
+    
+    dcmFile = str(e.img)
+    p = {}
+    p['plotRawInputImage'] = False
+    p['f1'] = int(e.f1)
+    p['f2'] = int(e.f2)
+    p['y1'] = int(e.y1)
+    p['y2'] = int(e.y2)
+    p['x1'] = int(e.x1)
+    p['x2'] = int(e.x2)
+    p['lowpassFilterTime'] = False
+    p['cx'] = e.cx
+    p['cy'] = e.cy
+    p['h'] = e.h
+    p['w'] = e.w
+    p['adjustManuallyCxy'] = False
+    p['cxyHelp'] = {}
+    p['adjustManuallyCxyOnTracking'] = e.adjustManuallyCxyOnTracking
+    p['adjustManuallyCxyOnTrackingCond'] = ['optical_flow', 'stdU>th', e.adjustManuallyCxyOnTrackingCondOFStdUTh]
+    p['cxOffset'] = e.cxOffset
+    p['cyOffset'] = e.cyOffset
+    p['adjustManuallyCxyOffset'] = False
+    p['stepFramesN'] = 1
+    p['technique'] = 'optical_flow'
+    p['techniquePars'] = ('lk_opt', 'new_centered_mask', 'feature_opt', e.techniqueParsLeeMethod, e.techniqueParsLeePctEx, e.techniqueParsLeePctIn)
+    p['plotImageInTracking'] = e.plotImageInTracking
+    p['winName'] = ''
+    p['timePerImage'] = 'auto'
+    p['plotTrackedFeatures'] = False
+    p['plotCircle'] = 'last'
+    p['plotTechniqueRes'] = False
+    p['plotTechniqueResAddData'] = {'OF_std_u_th': [e.plotAddDataOFStdUTh0], 'OF_std_v_th': [e.plotAddDataOFStdVTh0]}
+    p['saveTechniqueResTo'] = str(e.saveTechniqueResTo) if e.saveTechniqueResToEnabled else None
+    p['outFiles'] = [(str(e.outFile),'auto')]
+    resFile = str(e.resFile)
+    
+    return dcmFile, p, resFile
+    
+    
     
 
 
@@ -1630,6 +1874,7 @@ def trackMTJMultiTrackers(
     
     return cxRes, cyRes
                  
+
                  
                  
                  

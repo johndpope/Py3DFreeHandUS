@@ -5,7 +5,6 @@
 
 """
 
-from tracking import trackMTJ
 import numpy as np
 
 def MTJlengths(P1, P2, P3):

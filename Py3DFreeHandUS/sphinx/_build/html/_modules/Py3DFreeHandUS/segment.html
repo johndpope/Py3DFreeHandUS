@@ -47,7 +47,7 @@
           <div class="body">
             
   <h1>Source code for Py3DFreeHandUS.segment</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">.. module:: segment</span>
 <span class="sd">   :synopsis: helper module for image segmentation</span>
@@ -118,15 +118,15 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="c"># Threshold image</span>
+    <span class="c1"># Threshold image</span>
     <span class="n">maxVal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
     <span class="n">th</span><span class="p">,</span> <span class="n">bw</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">thI</span><span class="o">*</span><span class="n">maxVal</span><span class="p">),</span><span class="n">maxVal</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
-    <span class="c"># Detect edges</span>
+    <span class="c1"># Detect edges</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">bw</span><span class="p">,</span><span class="n">thCan1</span><span class="p">,</span><span class="n">thCan2</span><span class="p">,</span><span class="n">apertureSize</span><span class="o">=</span><span class="n">kerSizeCan</span><span class="p">)</span>
-    <span class="c"># Dilate edges</span>
+    <span class="c1"># Dilate edges</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">kerSizeDil</span><span class="p">,</span><span class="n">I</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">dilate</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c"># Find longest line</span>
+    <span class="c1"># Find longest line</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">HoughLinesP</span><span class="p">(</span><span class="n">dilate</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="n">thHou</span><span class="p">,</span><span class="n">minLineLength</span><span class="p">,</span><span class="n">maxLineGap</span><span class="p">)</span>
     <span class="n">maxL</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">lines</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
@@ -138,11 +138,11 @@
                 <span class="n">maxL</span> <span class="o">=</span> <span class="n">L</span>
                 <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span>
                 <span class="n">b</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x1</span>
-    <span class="c"># Return data</span>
+    <span class="c1"># Return data</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">bw</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">dilate</span>
 
 
-<span class="c"># inspired by: http://matplotlib.org/examples/widgets/buttons.html</span>
+<span class="c1"># inspired by: http://matplotlib.org/examples/widgets/buttons.html</span>
 </div>
 <div class="viewcode-block" id="SegmentUI"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.segment.SegmentUI">[docs]</a><span class="k">class</span> <span class="nc">SegmentUI</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;*(deprecated)* Class for performing manual point feature extraction.</span>
@@ -170,55 +170,55 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{},</span> <span class="n">Nclicks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{},</span> <span class="n">Nclicks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         
-        <span class="c"># Set sttributes</span>
+        <span class="c1"># Set sttributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">I</span> <span class="o">=</span> <span class="n">I</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Nclicks</span> <span class="o">=</span> <span class="n">Nclicks</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="mi">0</span>
         
-        <span class="c"># Create plot area</span>
+        <span class="c1"># Create plot area</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
         
-        <span class="c"># Crete current idx text</span>
+        <span class="c1"># Crete current idx text</span>
         <span class="n">axidx</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.065</span><span class="p">])</span>
         <span class="n">axidx</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axidx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axidx</span><span class="p">)</span>
         
-        <span class="c"># Show first image</span>
+        <span class="c1"># Show first image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showImage</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showPoints</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showCurrentIdx</span><span class="p">()</span>
         
-        <span class="c"># Define buttons</span>
+        <span class="c1"># Define buttons</span>
         <span class="n">axclick</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axreset</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axfileload</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axfilesave</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axprev</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axnext</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="n">bclick</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axclick</span><span class="p">,</span> <span class="s">&#39;Click&#39;</span><span class="p">)</span>
+        <span class="n">bclick</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axclick</span><span class="p">,</span> <span class="s1">&#39;Click&#39;</span><span class="p">)</span>
         <span class="n">bclick</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click</span><span class="p">)</span>
-        <span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s">&#39;Reset&#39;</span><span class="p">)</span>
+        <span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s1">&#39;Reset&#39;</span><span class="p">)</span>
         <span class="n">breset</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
-        <span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s">&#39;Load...&#39;</span><span class="p">)</span>
+        <span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s1">&#39;Load...&#39;</span><span class="p">)</span>
         <span class="n">bfileload</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileLoad</span><span class="p">)</span>
-        <span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s">&#39;Save...&#39;</span><span class="p">)</span>
+        <span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s1">&#39;Save...&#39;</span><span class="p">)</span>
         <span class="n">bfilesave</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileSave</span><span class="p">)</span>
-        <span class="n">bnext</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axnext</span><span class="p">,</span> <span class="s">&#39;Next&#39;</span><span class="p">)</span>
+        <span class="n">bnext</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axnext</span><span class="p">,</span> <span class="s1">&#39;Next&#39;</span><span class="p">)</span>
         <span class="n">bnext</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
-        <span class="n">bprev</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axprev</span><span class="p">,</span> <span class="s">&#39;Previous&#39;</span><span class="p">)</span>
+        <span class="n">bprev</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axprev</span><span class="p">,</span> <span class="s1">&#39;Previous&#39;</span><span class="p">)</span>
         <span class="n">bprev</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev</span><span class="p">)</span>
         
-        <span class="c"># Plot title</span>
+        <span class="c1"># Plot title</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         
-        <span class="c"># Adjust borders</span>
+        <span class="c1"># Adjust borders</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
         
-        <span class="c"># Plot</span>
+        <span class="c1"># Plot</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="n">block</span><span class="p">)</span>
         
     
@@ -241,13 +241,13 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Calculate index</span>
+        <span class="c1"># Calculate index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showCurrentIdx</span><span class="p">()</span>
-        <span class="c"># Replot image</span>
+        <span class="c1"># Replot image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showImage</span><span class="p">()</span>
-        <span class="c"># Plot points</span>
+        <span class="c1"># Plot points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showPoints</span><span class="p">()</span>
         
 </div>
@@ -261,13 +261,13 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Calculate index</span>
+        <span class="c1"># Calculate index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showCurrentIdx</span><span class="p">()</span>
-        <span class="c"># Replot image</span>
+        <span class="c1"># Replot image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showImage</span><span class="p">()</span>
-        <span class="c"># Plot points</span>
+        <span class="c1"># Plot points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showPoints</span><span class="p">()</span>
         
         </div>
@@ -306,7 +306,7 @@
             <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)):</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;ro&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             
@@ -319,7 +319,7 @@
     
     <span class="k">def</span> <span class="nf">_showCurrentIdx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">))</span>
         
     
 <div class="viewcode-block" id="SegmentUI.getData"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.segment.SegmentUI.getData">[docs]</a>    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -345,14 +345,14 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="c"># Load file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Load file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="c"># Plot points</span>
+        <span class="c1"># Plot points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_showPoints</span><span class="p">()</span>
 
 </div>
@@ -366,12 +366,12 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">asksaveasfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>        
-        <span class="c"># Save file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Save file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
         
 
@@ -398,41 +398,41 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         
-        <span class="c"># Set sttributes</span>
+        <span class="c1"># Set sttributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">I</span> <span class="o">=</span> <span class="n">I</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="mi">0</span>
         
-        <span class="c"># Create plot area</span>
+        <span class="c1"># Create plot area</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
         
-        <span class="c"># Crete current idx text</span>
+        <span class="c1"># Crete current idx text</span>
         <span class="n">axidx</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.065</span><span class="p">])</span>
         <span class="n">axidx</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axidx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axidx</span><span class="p">)</span>
         
-        <span class="c"># Show first image</span>
+        <span class="c1"># Show first image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
         
-        <span class="c"># Define buttons</span>
+        <span class="c1"># Define buttons</span>
         <span class="n">axprev</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
         <span class="n">axnext</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bnext</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axnext</span><span class="p">,</span> <span class="s">&#39;Next&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bnext</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axnext</span><span class="p">,</span> <span class="s1">&#39;Next&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bnext</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bprev</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axprev</span><span class="p">,</span> <span class="s">&#39;Previous&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bprev</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axprev</span><span class="p">,</span> <span class="s1">&#39;Previous&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bprev</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev</span><span class="p">)</span>
         
-        <span class="c"># Define index slider</span>
+        <span class="c1"># Define index slider</span>
         <span class="n">axsliderInd</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.065</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderInd</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axsliderInd</span><span class="p">,</span> <span class="s">&#39;Frame&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderInd</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axsliderInd</span><span class="p">,</span> <span class="s1">&#39;Frame&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderInd</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedInd</span><span class="p">)</span>
         
-        <span class="c"># Plot title</span>
+        <span class="c1"># Plot title</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         
-        <span class="c"># Adjust borders</span>
+        <span class="c1"># Adjust borders</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>    
         
         
@@ -465,7 +465,7 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Calculate index</span>
+        <span class="c1"># Calculate index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -481,7 +481,7 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Calculate index</span>
+        <span class="c1"># Calculate index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ind</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -497,7 +497,7 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Set index</span>
+        <span class="c1"># Set index</span>
         <span class="n">valIn</span> <span class="o">=</span> <span class="n">val</span>
         <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;&gt;</span> <span class="n">valIn</span><span class="p">:</span>
@@ -511,7 +511,7 @@
         <span class="sd">&quot;&quot;&quot;Show current frame number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">))</span>
         
         </div>
 <div class="viewcode-block" id="ViewerUI.showViewer"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.segment.ViewerUI.showViewer">[docs]</a>    <span class="k">def</span> <span class="nf">showViewer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -540,8 +540,8 @@
 <span class="sd">            </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ViewerWithFeaturesUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ViewerWithFeaturesUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">featuresUI</span> <span class="o">=</span> <span class="bp">None</span>
     
 <div class="viewcode-block" id="ViewerWithFeaturesUI.next"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.segment.ViewerWithFeaturesUI.next">[docs]</a>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -597,10 +597,10 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         
-        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentPointsUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])</span>
-        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentPointsUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">featuresUI</span> <span class="o">=</span> <span class="n">OptsPointsUI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         
@@ -625,10 +625,10 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maskParams</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maskParams</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         
-        <span class="nb">super</span><span class="p">(</span><span class="n">MaskImageUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])</span>
-        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MaskImageUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">featuresUI</span> <span class="o">=</span> <span class="n">OptsMaskImageUI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maskParams</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         
@@ -667,10 +667,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">autoSegParams</span><span class="p">,</span> <span class="n">dataConstr</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">autoSegParams</span><span class="p">,</span> <span class="n">dataConstr</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         
-        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentPointsHoughUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">])</span>
-        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentPointsHoughUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">featuresUI</span> <span class="o">=</span> <span class="n">OptsPointsHoughUI</span><span class="p">(</span><span class="n">autoSegParams</span><span class="p">,</span> <span class="n">dataConstr</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>   
             
@@ -694,7 +694,7 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
             
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">viewer</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">viewer</span><span class="p">,</span> <span class="n">Npoints</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="o">=</span> <span class="n">viewer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Npoints</span> <span class="o">=</span> <span class="n">Npoints</span>
@@ -704,19 +704,19 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="p">)</span>
         
         <span class="n">axclick</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bclick</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axclick</span><span class="p">,</span> <span class="s">&#39;Click&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bclick</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axclick</span><span class="p">,</span> <span class="s1">&#39;Click&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bclick</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click</span><span class="p">)</span>        
         
         <span class="n">axreset</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s">&#39;Reset&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s1">&#39;Reset&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">breset</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
         
         <span class="n">axfileload</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s">&#39;Load...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s1">&#39;Load...&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileLoad</span><span class="p">)</span>
         
         <span class="n">axfilesave</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s">&#39;Save...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s1">&#39;Save...&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileSave</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">showPoints</span><span class="p">()</span>
@@ -762,7 +762,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)):</span>
-                <span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;ro&#39;</span><span class="p">)</span>
+                <span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">pointsh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -801,13 +801,13 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="c"># Load file</span>
+        <span class="c1"># Load file</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">readFeaturesFile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
-        <span class="c"># Plot points</span>
+        <span class="c1"># Plot points</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showPoints</span><span class="p">()</span>
 
 </div>
@@ -819,12 +819,12 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">asksaveasfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>        
-        <span class="c"># Save file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Save file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
             
             </div>
@@ -864,70 +864,70 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
        
-    <span class="c"># Some parts are inspired by: http://matplotlib.org/examples/event_handling/lasso_demo.html   </span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">viewer</span><span class="p">,</span> <span class="n">maskParams</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Some parts are inspired by: http://matplotlib.org/examples/event_handling/lasso_demo.html   </span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">viewer</span><span class="p">,</span> <span class="n">maskParams</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="o">=</span> <span class="n">viewer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span> <span class="o">=</span> <span class="n">maskParams</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maskh</span> <span class="o">=</span> <span class="bp">None</span>
         
         <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="p">)</span>
         
-        <span class="c"># Add other ui components</span>
+        <span class="c1"># Add other ui components</span>
         <span class="n">axsliderWidth</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderWidth</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axsliderWidth</span><span class="p">,</span> <span class="s">&#39;Size&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderWidth</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axsliderWidth</span><span class="p">,</span> <span class="s1">&#39;Size&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderWidth</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedWidth</span><span class="p">)</span>
         
         <span class="n">axradioType</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;lasso&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;lasso&#39;</span><span class="p">:</span>
             <span class="n">active</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">active</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">radioType</span> <span class="o">=</span> <span class="n">RadioButtons</span><span class="p">(</span><span class="n">axradioType</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s">&#39;Pen&#39;</span><span class="p">),</span> <span class="n">active</span><span class="o">=</span><span class="n">active</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radioType</span> <span class="o">=</span> <span class="n">RadioButtons</span><span class="p">(</span><span class="n">axradioType</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="s1">&#39;Pen&#39;</span><span class="p">),</span> <span class="n">active</span><span class="o">=</span><span class="n">active</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radioType</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedType</span><span class="p">)</span>
         
         <span class="n">axmode</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;add&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axmode</span><span class="p">,</span> <span class="s">&#39;Add&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;add&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axmode</span><span class="p">,</span> <span class="s1">&#39;Add&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axmode</span><span class="p">,</span> <span class="s">&#39;Remove&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axmode</span><span class="p">,</span> <span class="s1">&#39;Remove&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modeChange</span><span class="p">)</span>        
         
         <span class="n">axreset</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s">&#39;Reset&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axreset</span><span class="p">,</span> <span class="s1">&#39;Reset&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">breset</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
         
         <span class="n">axfileload</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s">&#39;Load...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfileload</span><span class="p">,</span> <span class="s1">&#39;Load...&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bfileload</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileLoad</span><span class="p">)</span>
         
         <span class="n">axfilesave</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s">&#39;Save...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axfilesave</span><span class="p">,</span> <span class="s1">&#39;Save...&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bfilesave</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileSave</span><span class="p">)</span>
         
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;pen&#39;</span><span class="p">,</span><span class="s">&#39;lasso&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pen&#39;</span><span class="p">,</span><span class="s1">&#39;lasso&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s">&#39;button_press_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_onPress</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s1">&#39;button_press_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_onPress</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">showMask</span><span class="p">()</span>
         
 
     <span class="k">def</span> <span class="nf">_postLasso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verts</span><span class="p">):</span>
-        <span class="c"># Relsease and delele lasso</span>
+        <span class="c1"># Relsease and delele lasso</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">widgetlock</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lasso</span><span class="p">)</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">lasso</span>
-        <span class="c"># Create empty mask</span>
+        <span class="c1"># Create empty mask</span>
         <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">M</span>
         <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-        <span class="c"># Upsample vertices</span>
+        <span class="c1"># Upsample vertices</span>
         <span class="n">vertsPath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">verts</span><span class="p">)</span><span class="o">.</span><span class="n">interpolated</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
         <span class="n">verts</span> <span class="o">=</span> <span class="n">vertsPath</span><span class="o">.</span><span class="n">vertices</span>
         <span class="n">verts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">verts</span><span class="p">)</span>
-        <span class="c"># Fill mask</span>
+        <span class="c1"># Fill mask</span>
         <span class="n">idxR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">verts</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
         <span class="n">idxC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">verts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
         <span class="n">idxR</span><span class="p">[</span><span class="n">idxR</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -935,12 +935,12 @@
         <span class="n">idxR</span><span class="p">[</span><span class="n">idxR</span> <span class="o">&gt;=</span> <span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="n">idxC</span><span class="p">[</span><span class="n">idxC</span> <span class="o">&gt;=</span> <span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="n">mask</span><span class="p">[</span><span class="n">idxR</span><span class="p">,</span> <span class="n">idxC</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;pen&#39;</span><span class="p">:</span>
-            <span class="c"># Make dilation on mask</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pen&#39;</span><span class="p">:</span>
+            <span class="c1"># Make dilation on mask</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>
             <span class="n">structure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
             <span class="n">mask</span> <span class="o">=</span> <span class="n">binary_dilation</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;lasso&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;lasso&#39;</span><span class="p">:</span>
             <span class="n">xMin</span><span class="p">,</span> <span class="n">xMax</span> <span class="o">=</span> <span class="n">idxC</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">idxC</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
             <span class="n">yMin</span><span class="p">,</span> <span class="n">yMax</span> <span class="o">=</span> <span class="n">idxR</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">idxR</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xMin</span><span class="p">,</span> <span class="n">xMax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -952,35 +952,35 @@
             <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xv</span><span class="p">,</span><span class="n">yv</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
             <span class="n">ind</span> <span class="o">=</span> <span class="n">vertsPath</span><span class="o">.</span><span class="n">contains_points</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
             <span class="n">mask</span><span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="c"># Add/remove mask from current one if existing</span>
+        <span class="c1"># Add/remove mask from current one if existing</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="n">origMask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">origMask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;add&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;add&#39;</span><span class="p">:</span>
             <span class="n">mask</span> <span class="o">=</span> <span class="n">origMask</span> <span class="o">|</span> <span class="n">mask</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
             <span class="n">origMask</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="n">mask</span> <span class="o">=</span> <span class="n">origMask</span>
-        <span class="c"># Assign new mask</span>
+        <span class="c1"># Assign new mask</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">mask</span> 
-        <span class="c"># Show mask</span>
+        <span class="c1"># Show mask</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
         
     <span class="k">def</span> <span class="nf">_onPress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">widgetlock</span><span class="o">.</span><span class="n">locked</span><span class="p">():</span>
             <span class="k">return</span>
-        <span class="c"># Check if lasso is dragged onto another axes</span>
+        <span class="c1"># Check if lasso is dragged onto another axes</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">inaxes</span> <span class="o">&lt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="c"># Create lasso</span>
+        <span class="c1"># Create lasso</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">inaxes</span><span class="p">,</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">xdata</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">ydata</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postLasso</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;pen&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">lasso</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pen&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lasso</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lasso</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">set_color</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-        <span class="c"># Acquire a lock on the widget drawing</span>
+        <span class="c1"># Acquire a lock on the widget drawing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">widgetlock</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lasso</span><span class="p">)</span>
         
         
@@ -993,7 +993,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1007,10 +1007,10 @@
 <span class="sd">            Current radiobutton label.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s">&#39;Lasso&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;lasso&#39;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lasso&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;pen&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">maskParams</span><span class="p">[</span><span class="s1">&#39;selectorType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;pen&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
 
@@ -1024,12 +1024,12 @@
 <span class="sd">            Event thrown when clicking on connected button.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;add&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;del&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#39;Remove&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;add&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;del&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;Remove&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bmode</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">)</span>
             
     </div>
 <div class="viewcode-block" id="OptsMaskImageUI.reset"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.segment.OptsMaskImageUI.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
@@ -1053,7 +1053,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="n">maskRGBA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">M</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
             <span class="n">maskRGBA</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span>
-            <span class="n">maskRGBA</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="c"># semi-transparent</span>
+            <span class="n">maskRGBA</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="c1"># semi-transparent</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">maskh</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">maskRGBA</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1090,14 +1090,14 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="c"># Load file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Load file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="c"># Plot mask</span>
+        <span class="c1"># Plot mask</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
 
 </div>
@@ -1111,12 +1111,12 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="c"># Select path</span>
+        <span class="c1"># Select path</span>
         <span class="n">filePath</span> <span class="o">=</span> <span class="n">tkFileDialog</span><span class="o">.</span><span class="n">asksaveasfilename</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>        
-        <span class="c"># Save file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Save file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
             
             </div>
@@ -1154,86 +1154,86 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
             
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autoSegParams</span><span class="p">,</span> <span class="n">dataConstr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autoSegParams</span><span class="p">,</span> <span class="n">dataConstr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">OptsPointsHoughUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OptsPointsHoughUI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         
-        <span class="c"># Set segmentation parameters</span>
+        <span class="c1"># Set segmentation parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span> <span class="o">=</span> <span class="n">autoSegParams</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dataConstr</span> <span class="o">=</span> <span class="n">dataConstr</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lineh</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-        <span class="k">if</span> <span class="s">&#39;saveDataPath&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;saveDataPath&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;saveDataPath&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;saveDataPath&#39;</span><span class="p">]</span>
         
-        <span class="c"># Add other ui components</span>
+        <span class="c1"># Add other ui components</span>
         <span class="n">axslider1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThI</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider1</span><span class="p">,</span> <span class="s">&#39;Th&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thI&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThI</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider1</span><span class="p">,</span> <span class="s1">&#39;Th&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thI&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderThI</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedThI</span><span class="p">)</span>
         
         <span class="n">axslider2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan1</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider2</span><span class="p">,</span> <span class="s">&#39;ThC1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thCan1&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan1</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider2</span><span class="p">,</span> <span class="s1">&#39;ThC1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thCan1&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan1</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedThCan1</span><span class="p">)</span>
         
         <span class="n">axslider3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan2</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider3</span><span class="p">,</span> <span class="s">&#39;ThC2&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thCan2&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan2</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider3</span><span class="p">,</span> <span class="s1">&#39;ThC2&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thCan2&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderThCan2</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedThCan2</span><span class="p">)</span>
         
         <span class="n">axslider4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeCan</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider4</span><span class="p">,</span> <span class="s">&#39;KerC&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeCan&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeCan</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider4</span><span class="p">,</span> <span class="s1">&#39;KerC&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeCan&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeCan</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedKerSizeCan</span><span class="p">)</span>
         
         <span class="n">axslider5</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilV</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider5</span><span class="p">,</span> <span class="s">&#39;KerDv&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilV</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider5</span><span class="p">,</span> <span class="s1">&#39;KerDv&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilV</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedKerSizeDilV</span><span class="p">)</span>
         
         <span class="n">axslider6</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilH</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider6</span><span class="p">,</span> <span class="s">&#39;KerDh&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilH</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider6</span><span class="p">,</span> <span class="s1">&#39;KerDh&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilH</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedKerSizeDilH</span><span class="p">)</span>
         
         <span class="n">axslider7</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThHou</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider7</span><span class="p">,</span> <span class="s">&#39;ThHou&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thHou&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderThHou</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider7</span><span class="p">,</span> <span class="s1">&#39;ThHou&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thHou&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderThHou</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedThHou</span><span class="p">)</span>
         
         <span class="n">axslider8</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderMinLineLength</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider8</span><span class="p">,</span> <span class="s">&#39;minL&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;minLineLength&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderMinLineLength</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider8</span><span class="p">,</span> <span class="s1">&#39;minL&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;minLineLength&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderMinLineLength</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedMinLineLength</span><span class="p">)</span>
         
         <span class="n">axslider9</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sliderMaxLineGap</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider9</span><span class="p">,</span> <span class="s">&#39;maxGap&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;maxLineGap&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%0.0f</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sliderMaxLineGap</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span><span class="n">axslider9</span><span class="p">,</span> <span class="s1">&#39;maxGap&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">valinit</span><span class="o">=</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;maxLineGap&#39;</span><span class="p">],</span> <span class="n">valfmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.0f</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sliderMaxLineGap</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changedMaxLineGap</span><span class="p">)</span>
         
         <span class="n">axcreatepoints</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bcreatepoints</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axcreatepoints</span><span class="p">,</span> <span class="s">&#39;Create points on line&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bcreatepoints</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">axcreatepoints</span><span class="p">,</span> <span class="s1">&#39;Create points on line&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bcreatepoints</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">autoCreatePoints</span><span class="p">)</span>
         
-        <span class="c"># Automatically detect points for all frames</span>
+        <span class="c1"># Automatically detect points for all frames</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{}:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">J</span><span class="p">):</span>
-            <span class="c">#for i in range(0, 20):</span>
-                <span class="c"># Segment line</span>
-                <span class="k">print</span> <span class="s">&#39;Segmenting line for line </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">J</span><span class="p">)</span>
+            <span class="c1">#for i in range(0, 20):</span>
+                <span class="c1"># Segment line</span>
+                <span class="k">print</span> <span class="s1">&#39;Segmenting line for line </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">J</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="n">i</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
-                <span class="c"># Save images to folder</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">&lt;&gt;</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
-                    <span class="n">extent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_window_extent</span><span class="p">()</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi_scale_trans</span><span class="o">.</span><span class="n">inverted</span><span class="p">())</span>    <span class="c"># inspired by: http://stackoverflow.com/questions/4325733/save-a-subplot-in-matplotlib</span>
-                    <span class="n">figPath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">+</span> <span class="s">&#39;/frame_</span><span class="si">%2d</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>      
+                <span class="c1"># Save images to folder</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">&lt;&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">extent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_window_extent</span><span class="p">()</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi_scale_trans</span><span class="o">.</span><span class="n">inverted</span><span class="p">())</span>    <span class="c1"># inspired by: http://stackoverflow.com/questions/4325733/save-a-subplot-in-matplotlib</span>
+                    <span class="n">figPath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveDataPath</span> <span class="o">+</span> <span class="s1">&#39;/frame_</span><span class="si">%2d</span><span class="s1">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>      
                     <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figPath</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="n">extent</span><span class="o">.</span><span class="n">expanded</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
         
-        <span class="c"># Detect points for first frame</span>
+        <span class="c1"># Detect points for first frame</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ind</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         
-        <span class="c"># Show data</span>
+        <span class="c1"># Show data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
         
@@ -1246,7 +1246,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1260,7 +1260,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thCan1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thCan1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1274,7 +1274,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thCan2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thCan2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1297,7 +1297,7 @@
             <span class="n">val</span> <span class="o">=</span> <span class="mi">7</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;&gt;</span> <span class="n">valIn</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeCan</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeCan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeCan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1320,7 +1320,7 @@
             <span class="n">val</span> <span class="o">=</span> <span class="mi">7</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;&gt;</span> <span class="n">valIn</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilV</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1343,7 +1343,7 @@
             <span class="n">val</span> <span class="o">=</span> <span class="mi">7</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;&gt;</span> <span class="n">valIn</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sliderKerSizeDilH</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;kerSizeDil&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1357,7 +1357,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;thHou&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;thHou&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>
         
@@ -1371,7 +1371,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;minLineLength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;minLineLength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>    
         
@@ -1385,7 +1385,7 @@
 <span class="sd">            Current slider value.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s">&#39;maxLineGap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoSegParams</span><span class="p">[</span><span class="s1">&#39;maxLineGap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateData</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showData</span><span class="p">()</span>  
         
@@ -1425,8 +1425,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Npoints</span><span class="p">):</span>
             <span class="n">constr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataConstr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s">&#39;xPct&#39;</span> <span class="ow">in</span> <span class="n">constr</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">constr</span><span class="p">[</span><span class="s">&#39;xPct&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span>
+            <span class="k">if</span> <span class="s1">&#39;xPct&#39;</span> <span class="ow">in</span> <span class="n">constr</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">constr</span><span class="p">[</span><span class="s1">&#39;xPct&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
         
@@ -1453,7 +1453,7 @@
         <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">N</span>
         <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">ax</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lineh</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),(</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">),</span><span class="s">&#39;r-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lineh</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),(</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">),</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
         
         
         
@@ -1474,7 +1474,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span>
     
@@ -1503,40 +1503,40 @@
     
     <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fea</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">fea</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">])</span>   <span class="c"># Np x 4</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">fea</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">])</span>   <span class="c1"># Np x 4</span>
     <span class="k">return</span> <span class="n">P</span>
 
             
         
         
-<span class="c">#if __name__ == &#39;__main__&#39;:</span>
-<span class="c">#    </span>
-<span class="c">#    from image_utils import *</span>
-<span class="c">#    D, ds = readDICOM(&#39;C:/Users/Davide Monari/Desktop/KULeuvenJob/PythonSoftware/Ultrasound/cam_phantom_dave/test5_cam_br_Mevis.dcm&#39;)</span>
-<span class="c">#    I = pixelData2grey(D)</span>
-<span class="c">#        </span>
-<span class="c">#    parSeg = {}</span>
-<span class="c">#    parSeg[&#39;thI&#39;] = 0.1</span>
-<span class="c">#    parSeg[&#39;thCan1&#39;] = 50</span>
-<span class="c">#    parSeg[&#39;thCan2&#39;] = 150</span>
-<span class="c">#    parSeg[&#39;kerSizeCan&#39;] = 5</span>
-<span class="c">#    parSeg[&#39;kerSizeDil&#39;] = [3, 3]</span>
-<span class="c">#    parSeg[&#39;thHou&#39;] = 100</span>
-<span class="c">#    parSeg[&#39;minLineLength&#39;] = 10</span>
-<span class="c">#    parSeg[&#39;maxLineGap&#39;] = 10</span>
-<span class="c">#    </span>
-<span class="c">#    data = {}</span>
-<span class="c">#    dataConstr = [{&#39;xPct&#39;:0.2},{&#39;xPct&#39;:0.8}]    </span>
-<span class="c">#    </span>
-<span class="c">#    #ui = SegmentPointsHoughUI(2, parSeg, dataConstr, data, I, title=&#39;The title&#39;, saveDataPath=&#39;C:/Users/Davide Monari/Desktop/KULeuvenJob/PythonSoftware/Ultrasound/cam_phantom_dave/figs&#39;)</span>
-<span class="c">#    #ui = SegmentPointsUI(2, data, I, title=&#39;The title&#39;)  </span>
-<span class="c">#    </span>
-<span class="c">#    parMask = {}</span>
-<span class="c">#    parMask[&#39;selectorType&#39;] = &#39;lasso&#39;</span>
-<span class="c">#    parMask[&#39;width&#39;] = 5</span>
-<span class="c">#    </span>
-<span class="c">#    ui = MaskImageUI(parMask, data, I, title=&#39;The title&#39;)</span>
-<span class="c">#    ui.showViewer()</span>
+<span class="c1">#if __name__ == &#39;__main__&#39;:</span>
+<span class="c1">#    </span>
+<span class="c1">#    from image_utils import *</span>
+<span class="c1">#    D, ds = readDICOM(&#39;C:/Users/Davide Monari/Desktop/KULeuvenJob/PythonSoftware/Ultrasound/cam_phantom_dave/test5_cam_br_Mevis.dcm&#39;)</span>
+<span class="c1">#    I = pixelData2grey(D)</span>
+<span class="c1">#        </span>
+<span class="c1">#    parSeg = {}</span>
+<span class="c1">#    parSeg[&#39;thI&#39;] = 0.1</span>
+<span class="c1">#    parSeg[&#39;thCan1&#39;] = 50</span>
+<span class="c1">#    parSeg[&#39;thCan2&#39;] = 150</span>
+<span class="c1">#    parSeg[&#39;kerSizeCan&#39;] = 5</span>
+<span class="c1">#    parSeg[&#39;kerSizeDil&#39;] = [3, 3]</span>
+<span class="c1">#    parSeg[&#39;thHou&#39;] = 100</span>
+<span class="c1">#    parSeg[&#39;minLineLength&#39;] = 10</span>
+<span class="c1">#    parSeg[&#39;maxLineGap&#39;] = 10</span>
+<span class="c1">#    </span>
+<span class="c1">#    data = {}</span>
+<span class="c1">#    dataConstr = [{&#39;xPct&#39;:0.2},{&#39;xPct&#39;:0.8}]    </span>
+<span class="c1">#    </span>
+<span class="c1">#    #ui = SegmentPointsHoughUI(2, parSeg, dataConstr, data, I, title=&#39;The title&#39;, saveDataPath=&#39;C:/Users/Davide Monari/Desktop/KULeuvenJob/PythonSoftware/Ultrasound/cam_phantom_dave/figs&#39;)</span>
+<span class="c1">#    #ui = SegmentPointsUI(2, data, I, title=&#39;The title&#39;)  </span>
+<span class="c1">#    </span>
+<span class="c1">#    parMask = {}</span>
+<span class="c1">#    parMask[&#39;selectorType&#39;] = &#39;lasso&#39;</span>
+<span class="c1">#    parMask[&#39;width&#39;] = 5</span>
+<span class="c1">#    </span>
+<span class="c1">#    ui = MaskImageUI(parMask, data, I, title=&#39;The title&#39;)</span>
+<span class="c1">#    ui.showViewer()</span>
         
         
         

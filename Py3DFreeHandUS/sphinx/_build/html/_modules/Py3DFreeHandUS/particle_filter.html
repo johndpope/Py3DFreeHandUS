@@ -47,7 +47,7 @@
           <div class="body">
             
   <h1>Source code for Py3DFreeHandUS.particle_filter</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">.. module:: particle_filter</span>
 <span class="sd">   :synopsis: particle filter implementation.</span>
 
@@ -98,7 +98,7 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transModel</span> <span class="o">=</span> <span class="bp">None</span>
@@ -288,7 +288,7 @@
         <span class="n">nEffParticles</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wNextNorm</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">nEffParticles</span>
     </div>
-<div class="viewcode-block" id="ParticleFilter.resample"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.particle_filter.ParticleFilter.resample">[docs]</a>    <span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;inverse_transform&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="ParticleFilter.resample"><a class="viewcode-back" href="../../api/api.html#Py3DFreeHandUS.particle_filter.ParticleFilter.resample">[docs]</a>    <span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inverse_transform&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perform the resampling step.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -307,7 +307,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wNextNorm</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nParticles</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;inverse_transform&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;inverse_transform&#39;</span><span class="p">:</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="n">inverseTransformSampling</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nParticles</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xNext</span><span class="p">[:,</span><span class="n">idx</span><span class="o">.</span><span class="n">round</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">x</span>
@@ -334,9 +334,9 @@
 <span class="sd">        heavier weights.</span>
 <span class="sd">                </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Inspired by http://www.nehalemlabs.net/prototype/blog/2013/12/16/how-to-do-inverse-transformation-sampling-in-scipy-and-numpy/</span>
+    <span class="c1"># Inspired by http://www.nehalemlabs.net/prototype/blog/2013/12/16/how-to-do-inverse-transformation-sampling-in-scipy-and-numpy/</span>
     <span class="n">cumValues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
-    <span class="n">cumValues</span> <span class="o">/=</span> <span class="n">cumValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># can be removed later</span>
+    <span class="n">cumValues</span> <span class="o">/=</span> <span class="n">cumValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># can be removed later</span>
     <span class="n">invCdf</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">cumValues</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nSamples</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">invCdf</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -415,9 +415,9 @@
 <span class="sd">        See xNext.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;otherPars&#39;</span><span class="p">]</span>
-    <span class="n">sigmaPos</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;sigmaPos&#39;</span><span class="p">][:,</span><span class="bp">None</span><span class="p">]</span>
-    <span class="n">sigmaVel</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;sigmaVel&#39;</span><span class="p">][:,</span><span class="bp">None</span><span class="p">]</span>
+    <span class="n">pars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;otherPars&#39;</span><span class="p">]</span>
+    <span class="n">sigmaPos</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;sigmaPos&#39;</span><span class="p">][:,</span><span class="bp">None</span><span class="p">]</span>
+    <span class="n">sigmaVel</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;sigmaVel&#39;</span><span class="p">][:,</span><span class="bp">None</span><span class="p">]</span>
     <span class="n">nParticles</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.</span>
     <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="n">nParticles</span><span class="p">))</span> 
@@ -458,11 +458,11 @@
 <span class="sd">        See xNextEst.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Adaptive state estimate equation for first-oder autoregressive model (constant velocity)</span>
+    <span class="c1"># Adaptive state estimate equation for first-oder autoregressive model (constant velocity)</span>
     <span class="n">xNextEst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.</span>
-    <span class="n">alfaLearnPos</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;alfaLearnPos&#39;</span><span class="p">]</span>
-    <span class="n">alfaLearnVel</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s">&#39;alfaLearnVel&#39;</span><span class="p">]</span>
+    <span class="n">alfaLearnPos</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;alfaLearnPos&#39;</span><span class="p">]</span>
+    <span class="n">alfaLearnVel</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;alfaLearnVel&#39;</span><span class="p">]</span>
     <span class="n">xNextEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfaLearnPos</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">xEst</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="n">alfaLearnPos</span> <span class="o">*</span> <span class="n">xFromWeights</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">xNextEst</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfaLearnVel</span><span class="p">)</span> <span class="o">*</span> <span class="n">xEst</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alfaLearnVel</span> <span class="o">*</span> <span class="p">(</span><span class="n">xNextEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">xEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">dt</span>
     <span class="k">return</span> <span class="n">xNextEst</span>
@@ -511,30 +511,30 @@
 <span class="sd">        See wNext.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Classical Bhattacharyya distance-based observation model</span>
+    <span class="c1"># Classical Bhattacharyya distance-based observation model</span>
     <span class="n">nParticles</span> <span class="o">=</span> <span class="n">xNext</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nParticles</span><span class="p">,))</span>
-    <span class="c"># Get additional data</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;I&#39;</span><span class="p">]</span>      <span class="c"># current image</span>
-    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c"># box size</span>
-    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;posManuallySet&#39;</span><span class="p">]</span>
-    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;otherPars&#39;</span><span class="p">]</span>
-    <span class="n">nBins</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;nBins&#39;</span><span class="p">]</span>
-    <span class="n">sigmaBhatta</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;sigmaBhatta&#39;</span><span class="p">]</span>
-    <span class="c"># Get/calculate target histogram</span>
+    <span class="c1"># Get additional data</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span>      <span class="c1"># current image</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c1"># box size</span>
+    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;posManuallySet&#39;</span><span class="p">]</span>
+    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;otherPars&#39;</span><span class="p">]</span>
+    <span class="n">nBins</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;nBins&#39;</span><span class="p">]</span>
+    <span class="n">sigmaBhatta</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;sigmaBhatta&#39;</span><span class="p">]</span>
+    <span class="c1"># Get/calculate target histogram</span>
     <span class="k">if</span> <span class="n">posManuallySet</span> <span class="ow">or</span> <span class="n">xEst</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">T</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">Thist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">T</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>
-        <span class="n">addData</span><span class="p">[</span><span class="s">&#39;Thist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Thist</span>
+        <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;Thist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Thist</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">Thist</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;Thist&#39;</span><span class="p">]</span>
-    <span class="c"># Calculate particle weights</span>
+        <span class="n">Thist</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;Thist&#39;</span><span class="p">]</span>
+    <span class="c1"># Calculate particle weights</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nParticles</span><span class="p">):</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xNext</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
         <span class="n">O</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">Ohist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">O</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>    <span class="c"># histogram around particle &#39;i&#39;</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">histogramsSimilarity</span><span class="p">(</span><span class="n">Thist</span><span class="p">,</span> <span class="n">Ohist</span><span class="p">,</span> <span class="n">meas</span><span class="o">=</span><span class="s">&#39;bhattacharyya_coef&#39;</span><span class="p">)</span>
+        <span class="n">Ohist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">O</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>    <span class="c1"># histogram around particle &#39;i&#39;</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">histogramsSimilarity</span><span class="p">(</span><span class="n">Thist</span><span class="p">,</span> <span class="n">Ohist</span><span class="p">,</span> <span class="n">meas</span><span class="o">=</span><span class="s1">&#39;bhattacharyya_coef&#39;</span><span class="p">)</span>
         <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">C</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
     <span class="n">wNext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigmaBhatta</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">wNext</span>
@@ -583,50 +583,50 @@
 <span class="sd">        See wNext.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Classical Bhattacharyya distance-based observation model</span>
+    <span class="c1"># Classical Bhattacharyya distance-based observation model</span>
     <span class="n">nParticles</span> <span class="o">=</span> <span class="n">xNext</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">wNext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nParticles</span><span class="p">,))</span>
-    <span class="c"># Get additional data</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;I&#39;</span><span class="p">]</span>      <span class="c"># current image</span>
-    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c"># box size</span>
-    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;posManuallySet&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="s">&#39;otherPars&#39;</span> <span class="ow">in</span> <span class="n">addData</span><span class="p">:</span>
-        <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;otherPars&#39;</span><span class="p">]</span>
+    <span class="c1"># Get additional data</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span>      <span class="c1"># current image</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c1"># box size</span>
+    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;posManuallySet&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;otherPars&#39;</span> <span class="ow">in</span> <span class="n">addData</span><span class="p">:</span>
+        <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;otherPars&#39;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">otherPars</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">if</span> <span class="s">&#39;targetMask&#39;</span> <span class="ow">in</span> <span class="n">otherPars</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;targetMask&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;targetMask&#39;</span> <span class="ow">in</span> <span class="n">otherPars</span><span class="p">:</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;targetMask&#39;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s">&#39;obsFunVerbose&#39;</span> <span class="ow">in</span> <span class="n">otherPars</span><span class="p">:</span>
-        <span class="n">verbose</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;obsFunVerbose&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;obsFunVerbose&#39;</span> <span class="ow">in</span> <span class="n">otherPars</span><span class="p">:</span>
+        <span class="n">verbose</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;obsFunVerbose&#39;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">verbose</span> <span class="o">=</span> <span class="bp">False</span>  
-    <span class="c"># Get/calculate target histogram</span>
+    <span class="c1"># Get/calculate target histogram</span>
     <span class="k">if</span> <span class="n">posManuallySet</span> <span class="ow">or</span> <span class="n">xEst</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">T</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">addData</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
-    <span class="c">#plt.imshow(T)</span>
-    <span class="c">#plt.show()</span>
-    <span class="c"># Calculate particle weights</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+    <span class="c1">#plt.imshow(T)</span>
+    <span class="c1">#plt.show()</span>
+    <span class="c1"># Calculate particle weights</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nParticles</span><span class="p">):</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xNext</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
         <span class="n">O</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">O</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
             <span class="n">wNext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">NCC</span><span class="p">(</span><span class="n">O</span><span class="p">[</span><span class="n">mask</span><span class="o">==</span><span class="bp">True</span><span class="p">],</span><span class="n">T</span><span class="p">[</span><span class="n">mask</span><span class="o">==</span><span class="bp">True</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>  
-                <span class="c"># Plot most important particles</span>
+                <span class="c1"># Plot most important particles</span>
                 <span class="k">if</span> <span class="n">wNext</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">O</span><span class="o">*</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
-                    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Particle </span><span class="si">%d</span><span class="s">: </span><span class="si">%f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wNext</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Particle </span><span class="si">%d</span><span class="s1">: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wNext</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
                     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -681,28 +681,28 @@
 <span class="sd">        See xNextEst.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Get additional data</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;I&#39;</span><span class="p">]</span>      <span class="c"># current image</span>
-    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c"># box size</span>
-    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;posManuallySet&#39;</span><span class="p">]</span>
-    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;otherPars&#39;</span><span class="p">]</span>
-    <span class="n">nBins</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;nBins&#39;</span><span class="p">]</span>
-    <span class="n">alfaLearnHist</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;alfaLearnHist&#39;</span><span class="p">]</span>
+    <span class="c1"># Get additional data</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span>      <span class="c1"># current image</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c1"># box size</span>
+    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;posManuallySet&#39;</span><span class="p">]</span>
+    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;otherPars&#39;</span><span class="p">]</span>
+    <span class="n">nBins</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;nBins&#39;</span><span class="p">]</span>
+    <span class="n">alfaLearnHist</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;alfaLearnHist&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">posManuallySet</span><span class="p">:</span>
-        <span class="c"># Set non-positional state values</span>
+        <span class="c1"># Set non-positional state values</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># Update state</span>
+        <span class="c1"># Update state</span>
         <span class="n">xNextEst</span> <span class="o">=</span> <span class="n">arm01ConstVelEstFun</span><span class="p">(</span><span class="n">xEst</span><span class="p">,</span> <span class="n">xNextFromWeights</span><span class="p">,</span> <span class="n">otherPars</span><span class="p">)</span>
-        <span class="c"># Update target histogram</span>
-        <span class="n">Thist</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;Thist&#39;</span><span class="p">]</span>
+        <span class="c1"># Update target histogram</span>
+        <span class="n">Thist</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;Thist&#39;</span><span class="p">]</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xNextFromWeights</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-        <span class="c">#c = xNextEst[:2]</span>
+        <span class="c1">#c = xNextEst[:2]</span>
         <span class="n">O</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">Ohist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">O</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span><span class="bp">None</span><span class="p">,[</span><span class="n">nBins</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">])</span>
         <span class="n">Thist</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfaLearnHist</span><span class="p">)</span> <span class="o">*</span> <span class="n">Thist</span> <span class="o">+</span> <span class="n">alfaLearnHist</span> <span class="o">*</span> <span class="n">Ohist</span>
-        <span class="n">addData</span><span class="p">[</span><span class="s">&#39;Thist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Thist</span>
-    <span class="c"># Return estimated state</span>
+        <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;Thist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Thist</span>
+    <span class="c1"># Return estimated state</span>
     <span class="k">return</span> <span class="n">xNextEst</span>
     
     </div>
@@ -751,26 +751,26 @@
 <span class="sd">        See xNextEst.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Get additional data</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;I&#39;</span><span class="p">]</span>      <span class="c"># current image</span>
-    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c"># box size</span>
-    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;posManuallySet&#39;</span><span class="p">]</span>
-    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;otherPars&#39;</span><span class="p">]</span>
-    <span class="n">alfaLearnTemplate</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s">&#39;alfaLearnTemplate&#39;</span><span class="p">]</span>
+    <span class="c1"># Get additional data</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span>      <span class="c1"># current image</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;boxSize&#39;</span><span class="p">]</span>   <span class="c1"># box size</span>
+    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;posManuallySet&#39;</span><span class="p">]</span>
+    <span class="n">otherPars</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;otherPars&#39;</span><span class="p">]</span>
+    <span class="n">alfaLearnTemplate</span> <span class="o">=</span> <span class="n">otherPars</span><span class="p">[</span><span class="s1">&#39;alfaLearnTemplate&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">posManuallySet</span><span class="p">:</span>
-        <span class="c"># Set non-positional state values</span>
+        <span class="c1"># Set non-positional state values</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># Update state</span>
+        <span class="c1"># Update state</span>
         <span class="n">xNextEst</span> <span class="o">=</span> <span class="n">arm01ConstVelEstFun</span><span class="p">(</span><span class="n">xEst</span><span class="p">,</span> <span class="n">xNextFromWeights</span><span class="p">,</span> <span class="n">otherPars</span><span class="p">)</span>
-        <span class="c"># Update template histogram</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
+        <span class="c1"># Update template histogram</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">xNextFromWeights</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-        <span class="c">#c = xNextEst[:2]</span>
+        <span class="c1">#c = xNextEst[:2]</span>
         <span class="n">O</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alfaLearnTemplate</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">alfaLearnTemplate</span> <span class="o">*</span> <span class="n">O</span>
-        <span class="n">addData</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
-    <span class="c"># Return estimated state</span>
+        <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
+    <span class="c1"># Return estimated state</span>
     <span class="k">return</span> <span class="n">xNextEst</span>
     
     </div>
@@ -802,9 +802,9 @@
 <span class="sd">        See x. Velocity components are set to 0.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Create random particles all contained inside a box</span>
-    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;boxSize&#39;</span><span class="p">]</span>
-    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s">&#39;posManuallySet&#39;</span><span class="p">]</span>
+    <span class="c1"># Create random particles all contained inside a box</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;boxSize&#39;</span><span class="p">]</span>
+    <span class="n">posManuallySet</span> <span class="o">=</span> <span class="n">addData</span><span class="p">[</span><span class="s1">&#39;posManuallySet&#39;</span><span class="p">]</span>
     <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="n">xEst</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">posManuallySet</span> <span class="ow">or</span> <span class="n">xEst</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">xParticles</span> <span class="o">=</span> <span class="n">createRandomInMaskCoords</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nParticles</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
